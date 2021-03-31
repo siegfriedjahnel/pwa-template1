@@ -1,149 +1,203 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body{
-    padding: 0px;
-    margin: 0px;
-  }
-  button{
-    margin: auto;
-  }
-  .controlpanel{
-    margin: auto;
-    margin-right: 4px;
-  }
- 
-  #navbar{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width:100%;
-    height: 56px;
-    background-color: bisque;
-    margin: 0px;
-  }
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* ----------App-Shell--------------- */
+    body {
+      padding: 0px;
+      margin: 0px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+    }
 
-  #banner {
-  position: fixed;
-  opacity: 0;
-  width: 100%;
-  height: 80%;
-  background-color: #fff;
-  color: #000;
-  text-align: center;
-  border-radius: 8px;
-  padding: 16px;
-  right: -320px;
-  top: 64px;
-  transition: all .75s ease;
-  z-index: 5;
-}
+    button {
+      margin: auto;
+    }
+    .icon{
+      margin-right: 8px;
+    }
+    .content {
+      padding: 8px;
+    }
 
-#banner.show {
-  opacity: 1;
-  right: 0px;
-}
+    .navbar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 48px;
+      background-color: bisque;
+      padding: 4px;
 
-#toast {
-  position: fixed;
-  opacity: 0;
-  min-width: 250px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 8px;
-  padding: 16px;
-  right: -320px;
-  top: 64px;
-  transition: all .75s ease;
-  z-index: 5;
-}
+    }
 
-#toast.show {
-  opacity: 1;
-  right: 48px;
-}
-
-#menu{
-  position: fixed;
-  opacity: 0;
-  width:250px;
-  background: lightblue;
-  top: 64px;
-  right: -300px;
-  transition: all .75s ease;
-}
-
-#menu.show {
-  opacity: 1;
-  right: 0px;
-}
+    /* ------------------------------------------------- */
 
 
 
+    /* --------------components---------------------------- */
+    .controlpanel {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background-color: grey;
+    }
 
 
-</style>
+    #banner {
+      position: fixed;
+      opacity: 0;
+      width: 100%;
+      height: 80%;
+      background-color: whitesmoke;
+      color: #000;
+      text-align: center;
+      border-radius: 8px;
+      padding: 0px;
+      right: -320px;
+      top: 64px;
+      transition: all .75s ease;
+      z-index: 5;
+    }
+
+    #banner.show {
+      opacity: 1;
+      right: 0px;
+    }
+
+    #bannerContent {
+      padding: 16px;
+    }
+
+    #toast {
+      position: fixed;
+      opacity: 0;
+      min-width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 16px;
+      right: -320px;
+      top: 64px;
+      transition: all .75s ease;
+      z-index: 5;
+    }
+
+    #toast.show {
+      opacity: 1;
+      right: 48px;
+    }
+
+    #menu {
+      position: fixed;
+      opacity: 0;
+      width: 250px;
+      background: lightblue;
+      top: 64px;
+      right: -300px;
+      transition: all .75s ease;
+    }
+
+    #menu.show {
+      opacity: 1;
+      right: 0px;
+    }
+
+    /* ------------------------------------------------------ */
+  </style>
 </head>
+
 <body>
-<div id="navbar" class="navbar">
+  <div id="navbar" class="navbar">
+    <span>Appname</span>
+    <span>
+      <a href="#" onclick="showToast('hallo Welt')"><img class="icon" src="cancel-o-24.png"></a>
+      <a href="#" onclick="toggleBanner('hallo Welt')"><img class="icon" src="info-24.png"></a>
+      <a href="#" onclick="toggleBanner('hallo Welt')"><img class="icon" src="share-24.png"></a>
+      <a href="#" onclick="toggleMenu('hallo Welt')"><img class="icon" src="menu-24b.png"></a>
+    </span>
+  </div>
 
-  <span class="disc"></span>
-  <span class="controlpanel">
+  <components>
+    <div id="toast"></div>
 
-  <a href="#" onclick="showToast('hallo Welt')"><img src="cancel-36.png"></a>
-  <a href="#" onclick="toggleBanner('hallo Welt')"><img src="refresh-36.png"></a>
-  <a href="#" onclick="toggleMenu('hallo Welt')"><img src="menu-36.png"></a>
+    <div id="banner">
+      <a href="#" onclick="closeParent(this)">
+        <div class="controlpanel"><img class="icon" src="arrow-back-24.png"><span><img class="icon" src="cancel-o-24.png"></span></div>
+      </a>
+      <div id="bannerContent">Ich bin ein Banner</div>
+    </div>
 
-  </span>
+    <div id="menu">
+      <a href="#" onclick="closeParent(this)">
+        <div class="controlpanel"><img class="icon" src="arrow-back-24.png"><span><img class="icon" src="cancel-o-24.png"></span></div>
+      </a>
+      <ul>
+        <li>Info</li>
+        <li>Share by whattsapp</li>
+        <li>Refresh</li>
+      </ul>
+    </div>
+  </components>
 
-</div>
-<h2>Snackbar / Toast</h2>
-<p>Snackbars are often used as a tooltips/popups to show a message at the bottom of the screen.</p>
-<p>Snackbars are often used as a tooltips/popups to show a message at the bottom of the screen.</p>
-<p>Snackbars are often used as a tooltips/popups to show a message at the bottom of the screen.</p>
-<p>Click on the button to show the toast. It will disappear after 3 seconds.</p>
+  <section class="content">
+    <h2>Snackbar / Toast</h2>
+    <p>Snackbars are often used as a tooltips/popups to show a message at the bottom of the screen.</p>
+    <p>Snackbars are often used as a tooltips/popups to show a message at the bottom of the screen.</p>
+    <p>Snackbars are often used as a tooltips/popups to show a message at the bottom of the screen.</p>
+    <p>Click on the button to show the toast. It will disappear after 3 seconds.</p>
+
+  </section>
 
 
-<div id="toast"></div>
-<div id="banner"></div>
-<div id="menu">
-  <ul>
-    <li>Info</li>
-    <li>Share by whattsapp</li>
-    <li>Refresh</li>
-  </ul>
-</div>
+  <script>
+    function showToast(text) {
+      let t = document.getElementById("toast");
+      t.innerHTML = text;
+      t.className = "show";
+      setTimeout(function () { t.className = "" }, 3000);
+    }
 
-<script>
-function showToast(text) {
-  let t = document.getElementById("toast");
-  t.innerHTML=text;
-  t.className = "show";
-  setTimeout(function(){ t.className = ""}, 3000);
-}
+    function toggleMenu() {
+      let m = document.getElementById("menu");
+      if (m.className == "") {
+        m.className = "show";
+      } else {
+        m.className = "";
+      }
+    }
 
-function toggleMenu() {
-  let m = document.getElementById("menu");
-  if(m.className == ""){
-   m.className="show";
-  }else{
-    m.className="";
-  }
-}
+    function toggleBanner(content) {
+      let b = document.getElementById("banner");
+      let bc = document.getElementById("bannerContent");
+      fetch('share.html')
+    .then(function (response) {
+      return response.text();
+    })
+    .then(function (html) {
+      //var parser = new DOMParser();
+      //var doc = parser.parseFromString(html, "text/html");
+      bc.innerHTML = html;
+    })
+      //b.innerHTML=content;
+      if (b.className == "") {
+        b.className = "show";
+      } else {
+        b.className = "";
+      }
+    }
 
-function toggleBanner(content) {
-  let b = document.getElementById("banner");
-  b.innerHTML=content;
-  if(b.className == ""){
-   b.className="show";
-  }else{
-    b.className="";
-  }
-}
-</script>
+    function closeParent(e) {
+      e.parentNode.className = "";
+    }
+  </script>
 
 </body>
+
 </html>

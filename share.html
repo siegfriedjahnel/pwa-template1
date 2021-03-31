@@ -1,0 +1,25 @@
+<script src="qrcode.min.js"></script>
+
+<style>
+#QR-Box{
+  margin: auto;
+}
+</style>
+
+<h3>App teilen</h3>
+
+<p>
+  <a href="#" onclick="sharebyWhatsapp()">WhatsApp</a>
+</p>
+
+<div id="QR-Box"></div>
+
+<script>
+  function showQR() {
+    let div = document.getElementById("QR-Box");
+    div.innerHTML = "";
+    let thisUrl = window.location.href;
+    new QRCode(div, { width: 400, height: 400, text: thisUrl });
+  }
+  showQR();
+  </script>
